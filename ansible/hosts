@@ -3,3 +3,6 @@ client0
 
 [osds]
 osd0
+osd1
+osd2
+osd3
