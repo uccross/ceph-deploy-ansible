@@ -1,6 +1,6 @@
 - name: "copy setup files"
   copy:
-    src: {{ item }}
+    src: "{{ item }}"
     dest: "{{ local_home }}"
     mode: '0644'
   with_items:

@@ -5,3 +5,5 @@ format_device: sda4
 ceph_conf: ceph.conf_osize256_wsize128
 osd_device_path: /dev/sdb 
 local_home: /users/kat/
+release_name: luminous
+
