@@ -1,16 +1,12 @@
 - name: "copy setup files"
   copy:
-    src: ./files/get_nodes.sh
+    src: {{ item }}
     dest: "{{ local_home }}"
     mode: '0644'
-  copy:
-    src: ./files/cluster_setup_copy_ssh_keys.sh
-    dest: "{{ local_home }}"
-    mode: '0644'
-  copy:
-    src: ./files/format-device.sh
-    dest: "{{ local_home }}"
-    mode: '0644'
+  with_items:
+    - ./files/get_nodes.sh
+    - ./files/cluster_setup_copy_ssh_keys.sh
+    - ./files/format-device.sh
 
 - name: "making the node list"
   shell: bash get_nodes.sh {{ num_osds }} ;
