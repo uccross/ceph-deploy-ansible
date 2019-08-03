@@ -1,0 +1,13 @@
+- name: "installing software"
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - vim
+    - tmux
+    - screen
+    - tkdiff
+    - dstat
+
+- name: "adding keyfile"
+  shell: |
+    cp /proj/skyhook-PG0/kat_stuff/id_rsa "{{ local_home }}/.ssh"
+    sudo chmod 0600 "{{ local_home }}/.ssh/id_rsa"
