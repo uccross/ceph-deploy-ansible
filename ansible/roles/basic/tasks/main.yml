@@ -7,6 +7,12 @@
     - tkdiff
     - dstat
 
+- name: "copy expected results files"
+  copy:
+    src: ./files/postreqs.sh
+    dest: "{{ local_home }}"
+    mode: '0644'
+
 - name: "adding keyfile"
   shell: |
     cp /proj/skyhook-PG0/kat_stuff/id_rsa "{{ local_home }}/.ssh"
