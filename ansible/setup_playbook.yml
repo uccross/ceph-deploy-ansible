@@ -13,13 +13,14 @@
   roles:
     - clients
 
-#- hosts: clients
-#  vars_files:
-#    - ./vars/extra_vars.yml
-#  tasks:
-#  - name "self-validate"
-#      shell: |
-#        cd "{{ local_home }}" ;
-#        python validate.py res_select_all.out res_select_all.txt ;
-#        python validate.py res_project_cols.out res_project_cols.txt ;
-#        python validate.py res_sum.out res_sum.txt ;
+# self-validation
+- hosts: clients
+  gather_facts: false
+  become: True
+  any_errors_fatal: true
+  post_tasks:
+    - name: "get ceph status from the first monitor"
+      command: ceph -s
+      changed_when: false
+      delegate_to: client0
+      run_once: true
