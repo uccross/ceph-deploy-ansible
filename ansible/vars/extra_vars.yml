@@ -1,5 +1,5 @@
 ---
 release_name: luminous
-ceph_conf: ceph.conf_osize512_wsize500
+ceph_conf: ceph.conf_osize512_wsize256
 osd_device_path: /dev/sdb 
 num_osds: 1
