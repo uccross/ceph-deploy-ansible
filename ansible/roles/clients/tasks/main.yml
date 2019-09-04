@@ -44,7 +44,7 @@
   ignore_errors: yes
 
 - name: "overwriting ceph.conf part0"
-  copy: src="../../../ceph_conf/{{ ceph_conf }}"
+  copy: src="{{ ceph_deploy_ansible_path }}/ceph_conf/{{ ceph_conf }}"
         dest="{{ local_home }}/cluster"
         mode=preserve
 
