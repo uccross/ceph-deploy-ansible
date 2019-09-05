@@ -58,5 +58,5 @@
 # clean up
 - name: "running install-deps"
   shell: |
-    cd "/mnt/{{ format_device }}/skyhookdm-ceph" ;
-    ./install-deps.sh ;
+    cd "/mnt/{{ format_device }}" ;
+    rm -rf "/mnt/{{ format_device }}/skyhookdm-ceph";
