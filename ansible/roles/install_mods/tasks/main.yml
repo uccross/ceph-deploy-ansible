@@ -1,0 +1,54 @@
+- name: "copy setup files"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ local_home }}"
+    mode: '0644'
+  with_items:
+    - ./files/format-device.sh
+
+- name: "running format device"
+  shell: sh format-device.sh {{ this_user }} {{ format_device }} ;
+  ignore_errors: yes
+
+- name: "clone skyhook repo"
+  shell: |
+    cd "/mnt/{{ format_device }}" ;
+    git clone https://github.com/uccross/skyhookdm-ceph.git
+    
+- name: "setup skyhook repo"
+  shell: |
+    cd "/mnt/{{ format_device }}/skyhookdm-ceph" ;
+    git checkout {{ skyhook_branch }} ;
+    
+- name: "running install-deps"
+  shell: |
+    cd "/mnt/{{ format_device }}/skyhookdm-ceph" ;
+    ./install-deps.sh ;
+    
+- name: "running do_cmake"
+  shell: |
+    cd "/mnt/{{ format_device }}/skyhookdm-ceph" ;
+    ./do_cmake.sh ;
+
+- name: "make librados so lib"
+  shell: |
+    cd "/mnt/{{ format_device }}/skyhookdm-ceph/build" ;
+    make -j36 librados ;
+
+- name: "make ceph-osd"
+  shell: |
+    cd "/mnt/{{ format_device }}/skyhookdm-ceph/build" ;
+    make -j36 ceph-osd ;
+    
+# install librados changes
+- name: "installing rados so lib"
+  shell: |
+    sudo cp "/mnt/{{ format_device }}/skyhookdm-ceph/build/lib/librados.so.2.0.0"  /usr/lib/x86_64-linux-gnu/ ;
+    cd /usr/lib/x86_64-linux-gnu/ ;
+    sudo ln -s librados.so.2.0.0 librados.so.2 ;
+    sudo ln -s librados.so.2 librados.so ;
+
+# install ceph-osd changes
+- name: "installing ceph-osd bin"
+  shell: |
+    sudo cp "/mnt/{{ format_device }}/skyhookdm-ceph/build/bin/ceph-osd" /usr/bin/ ;
