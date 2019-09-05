@@ -20,7 +20,7 @@
 - name: "setup skyhook repo"
   shell: |
     cd "/mnt/{{ format_device }}/skyhookdm-ceph" ;
-    git checkout {{ skyhook_branch }} ;
+    git checkout skyhook-pdsw19 ;
     
 - name: "running install-deps"
   shell: |
