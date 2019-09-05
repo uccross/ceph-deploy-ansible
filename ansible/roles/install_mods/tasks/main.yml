@@ -45,11 +45,6 @@
   with_items:
     - /mnt/sda4/skyhookdm-ceph/build/bin/ceph-osd
 
-# install ceph-osd changes
-- name: "installing ceph-osd bin"
-  shell: |
-    sudo cp "/mnt/{{ format_device }}/skyhookdm-ceph/build/bin/ceph-osd" /usr/bin/ ;
-
 # clean up
 - name: "running install-deps"
   shell: |
