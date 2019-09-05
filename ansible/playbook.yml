@@ -27,7 +27,7 @@
   environment:
     DEBIAN_FRONTEND: noninteractive
   roles:
-    - mods_install
+    - install_mods
 
 - hosts: clients
   vars:
