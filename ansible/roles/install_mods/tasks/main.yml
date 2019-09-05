@@ -36,13 +36,13 @@
   with_items:
     - /mnt/sda4/skyhookdm-ceph/build/lib/libcls_tabular.so.1.0.0
    
-- name: "installing rados so lib"
+- name: "make rados symlinks"
   shell: |
     cd /usr/lib/x86_64-linux-gnu/ ;
     sudo ln -s librados.so.2.0.0 librados.so.2 ;
     sudo ln -s librados.so.2 librados.so ;
 
-- name: "installing tabular so lib"
+- name: "make tabular symlinks"
   shell: |
     cd /usr/lib/x86_64-linux-gnu/rados-classes/ ;
     sudo ln -s libcls_tabular.so.1.0.0 libcls_tabular.so.1 ;
