@@ -22,6 +22,7 @@
   vars:
     local_home: "{{ lookup('env','HOME') }}"
     ceph_deploy_ansible_path: "{{ lookup('env','PWD') }}"
+    this_user:  "{{ lookup('env','USER') }}"
   vars_files:
     - ./vars/extra_vars.yml
   environment:
