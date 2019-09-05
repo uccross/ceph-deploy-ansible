@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  become: True
   vars:
     local_home: "{{ lookup('env','HOME') }}"
   vars_files:
@@ -8,6 +9,7 @@
     - basic
 
 - hosts: clients
+  become: True
   vars:
     local_home: "{{ lookup('env','HOME') }}"
     ceph_deploy_ansible_path: "{{ lookup('env','PWD') }}"
