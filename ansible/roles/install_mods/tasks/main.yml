@@ -40,8 +40,8 @@
   shell: |
     cd /usr/lib/x86_64-linux-gnu/rados-classes/; if test -f libcls_tabular.so.1; then sudo  unlink libcls_tabular.so.1; fi;
     cd /usr/lib/x86_64-linux-gnu/rados-classes/; if test -f libcls_tabular.so; then sudo unlink libcls_tabular.so; fi;
-    cd /usr/lib/x86_64-linux-gnu/rados-classes/; if test -f librados.so.2; then sudo  unlink libcls_tabular.so.2; fi;
-    cd /usr/lib/x86_64-linux-gnu/rados-classes/; if test -f librados.so; then sudo unlink libcls_tabular.so; fi;
+    cd /usr/lib/x86_64-linux-gnu/rados-classes/; if test -f librados.so.2; then sudo  unlink librados.so.2; fi;
+    cd /usr/lib/x86_64-linux-gnu/rados-classes/; if test -f librados.so; then sudo unlink librados.so; fi;
   
 - name: "make rados symlinks"
   shell: |
