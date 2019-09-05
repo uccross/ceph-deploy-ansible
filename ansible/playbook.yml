@@ -23,6 +23,7 @@
     local_home: "{{ lookup('env','HOME') }}"
     ceph_deploy_ansible_path: "{{ lookup('env','PWD') }}"
     this_user:  "{{ lookup('env','USER') }}"
+    format_device: "sda4"
   vars_files:
     - ./vars/extra_vars.yml
   environment:
