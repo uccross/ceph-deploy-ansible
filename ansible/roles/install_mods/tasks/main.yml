@@ -10,6 +10,8 @@
   shell: sh format-device.sh {{ this_user }} {{ format_device }} ;
   ignore_errors: yes
 
+
+# THIS ASSUMES MODS ARE IN SKYHOOK!!!!
 - name: "clone skyhook repo"
   shell: |
     cd "/mnt/{{ format_device }}" ;
@@ -52,3 +54,9 @@
 - name: "installing ceph-osd bin"
   shell: |
     sudo cp "/mnt/{{ format_device }}/skyhookdm-ceph/build/bin/ceph-osd" /usr/bin/ ;
+
+# clean up
+- name: "running install-deps"
+  shell: |
+    cd "/mnt/{{ format_device }}/skyhookdm-ceph" ;
+    ./install-deps.sh ;
