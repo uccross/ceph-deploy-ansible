@@ -14,18 +14,13 @@
   shell: sh cluster_setup_copy_ssh_keys.sh ;
 
 - name: "make cluster dir"
-  file:
-    path: "{{ local_home }}/cluster"
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
+  shell: |
+    mkdir "{{ local_home }}/cluster" ;
 
 - name: "install ceph-deploy"
   shell: |
-    chmod -R '755' "{{ local_home }}/cluster" ;
-    apt-get -f install ; 
-    apt-get install -y python-virtualenv ; 
+    sudo apt-get -f install ; 
+    sudo apt-get install -y python-virtualenv ; 
     cd "{{ local_home }}/cluster" ;
     virtualenv env ;
     env/bin/pip install ceph-deploy==1.5.38 ;
