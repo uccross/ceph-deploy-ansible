@@ -11,32 +11,7 @@
   ignore_errors: yes
 
 
-# THIS ASSUMES MODS ARE IN SKYHOOK!!!!
-- name: "clone skyhook repo"
-  shell: |
-    cd "/mnt/{{ format_device }}" ;
-    git clone https://github.com/uccross/skyhookdm-ceph.git
-    
-- name: "setup skyhook repo"
-  shell: |
-    cd "/mnt/{{ format_device }}/skyhookdm-ceph" ;
-    git checkout skyhook-pdsw19 ;
-    
-- name: "running install-deps"
-  shell: |
-    cd "/mnt/{{ format_device }}/skyhookdm-ceph" ;
-    ./install-deps.sh ;
-    
-- name: "running do_cmake"
-  shell: |
-    cd "/mnt/{{ format_device }}/skyhookdm-ceph" ;
-    ./do_cmake.sh ;
-
-- name: "make ceph-osd"
-  shell: |
-    cd "/mnt/{{ format_device }}/skyhookdm-ceph/build" ;
-    make -j36 ceph-osd ;
-
+# THIS ASSUMES MODS ARE PRE-BULIT FROM SKYHOOK!!!
 - name: "copy modified bins"
   copy:
     src: "{{ item }}"
@@ -45,8 +20,30 @@
   with_items:
     - /mnt/sda4/skyhookdm-ceph/build/bin/ceph-osd
 
-# clean up
-- name: "running install-deps"
+- name: "copy modified libs"
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/lib/x86_64-linux-gnu/"
+    mode: preserve
+  with_items:
+    - /mnt/sda4/skyhookdm-ceph/build/lib/librados.so.2.0.0
+    
+- name: "copy modified rados-classes"
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/lib/x86_64-linux-gnu/rados-classes/"
+    mode: preserve
+  with_items:
+    - /mnt/sda4/skyhookdm-ceph/build/lib/libcls_tabular.so.1.0.0
+   
+- name: "installing rados so lib"
   shell: |
-    cd "/mnt/{{ format_device }}" ;
-    rm -rf "/mnt/{{ format_device }}/skyhookdm-ceph";
+    cd /usr/lib/x86_64-linux-gnu/ ;
+    sudo ln -s librados.so.2.0.0 librados.so.2 ;
+    sudo ln -s librados.so.2 librados.so ;
+
+- name: "installing tabular so lib"
+  shell: |
+    cd /usr/lib/x86_64-linux-gnu/rados-classes/ ;
+    sudo ln -s libcls_tabular.so.1.0.0 libcls_tabular.so.1 ;
+    sudo ln -s libcls_tabular.so.1 libcls_tabular.so ;
