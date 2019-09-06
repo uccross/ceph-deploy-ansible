@@ -20,20 +20,6 @@
   roles:
     - clients
 
-- hosts: all
-  become: True
-  vars:
-    local_home: "{{ lookup('env','HOME') }}"
-    ceph_deploy_ansible_path: "{{ lookup('env','PWD') }}"
-    this_user:  "{{ lookup('env','USER') }}"
-    format_device: "sda4"
-  vars_files:
-    - ./vars/extra_vars.yml
-  environment:
-    DEBIAN_FRONTEND: noninteractive
-  roles:
-    - install_mods
-
 - hosts: clients
   become: True
   vars:
