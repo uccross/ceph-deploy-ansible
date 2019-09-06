@@ -15,6 +15,7 @@
 
 - name: "make cluster dir"
   shell: |
+    rm -rf "{{ local_home }}/cluster" ;
     mkdir "{{ local_home }}/cluster" ;
 
 - name: "install ceph-deploy"
