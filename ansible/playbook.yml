@@ -20,7 +20,7 @@
   roles:
     - clients
 
-- hosts: clients
+- hosts: all
   become: True
   vars:
     local_home: "{{ lookup('env','HOME') }}"
