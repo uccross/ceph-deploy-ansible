@@ -12,13 +12,13 @@
 
 
 # THIS ASSUMES MODS ARE PRE-BULIT FROM SKYHOOK!!!
-- name: "copy modified bins"
-  copy:
-    src: "{{ item }}"
-    dest: "/usr/bin/"
-    mode: preserve
-  with_items:
-    - /mnt/sda4/skyhookdm-ceph/build/bin/ceph-osd
+#- name: "copy modified bins"
+#  copy:
+#    src: "{{ item }}"
+#    dest: "/usr/bin/"
+#    mode: preserve
+#  with_items:
+#    - /mnt/sda4/skyhookdm-ceph/build/bin/ceph-osd
 
 - name: "copy modified libs"
   copy:
