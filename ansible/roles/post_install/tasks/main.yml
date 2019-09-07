@@ -1,3 +1,31 @@
+- name: "copy setup files"
+  copy:
+    src: "{{ item }}"
+    dest: "{{ local_home }}"
+    mode: '0644'
+  with_items:
+    - ./files/get_nodes.sh
+    - ./files/cluster_setup_copy_ssh_keys.sh
+
+- name: "making the node list"
+  shell: bash get_nodes.sh {{ num_osds }} ;
+
+- name: "running ssh setup"
+  shell: sh cluster_setup_copy_ssh_keys.sh ;
+
+- name: "make cluster dir"
+  shell: |
+    rm -rf "{{ local_home }}/cluster" ;
+    mkdir "{{ local_home }}/cluster" ;
+
+- name: "install ceph-deploy"
+  shell: |
+    sudo apt-get -f install ;
+    sudo apt-get install -y python-virtualenv ;
+    cd "{{ local_home }}/cluster" ;
+    virtualenv env ;
+    env/bin/pip install ceph-deploy==1.5.38 ;
+
 - name: "spinning up a new cluster"
   shell: |
     cd "{{ local_home }}/cluster" ;

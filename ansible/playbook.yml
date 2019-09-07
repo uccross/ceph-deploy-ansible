@@ -8,17 +8,45 @@
   roles:
     - basic
 
-- hosts: clients
-  become: True
-  vars:
-    local_home: "{{ lookup('env','HOME') }}"
-    ceph_deploy_ansible_path: "{{ lookup('env','PWD') }}"
-  vars_files:
-    - ./vars/extra_vars.yml
-  environment:
-    DEBIAN_FRONTEND: noninteractive
-  roles:
-    - clients
+#- hosts: clients
+#  become: True
+#  vars:
+#    local_home: "{{ lookup('env','HOME') }}"
+#    ceph_deploy_ansible_path: "{{ lookup('env','PWD') }}"
+#  vars_files:
+#    - ./vars/extra_vars.yml
+#  environment:
+#    DEBIAN_FRONTEND: noninteractive
+#  roles:
+#    - clients
+#
+#- hosts: all
+#  become: True
+#  vars:
+#    local_home: "{{ lookup('env','HOME') }}"
+#    ceph_deploy_ansible_path: "{{ lookup('env','PWD') }}"
+#    this_user:  "{{ lookup('env','USER') }}"
+#    format_device: "sda4"
+#  vars_files:
+#    - ./vars/extra_vars.yml
+#  environment:
+#    DEBIAN_FRONTEND: noninteractive
+#  roles:
+#    - install_mods
+
+#- hosts: all
+#  become: True
+#  vars:
+#    local_home: "{{ lookup('env','HOME') }}"
+#    ceph_deploy_ansible_path: "{{ lookup('env','PWD') }}"
+#    this_user:  "{{ lookup('env','USER') }}"
+#    format_device: "sda4"
+#  vars_files:
+#    - ./vars/extra_vars.yml
+#  environment:
+#    DEBIAN_FRONTEND: noninteractive
+#  roles:
+#    - make_install
 
 - hosts: clients
   become: True
@@ -33,13 +61,13 @@
     - post_install
 
 # self-validation
-- hosts: clients
-  gather_facts: false
-  become: True
-  any_errors_fatal: true
-  post_tasks:
-    - name: "get ceph status from the first monitor"
-      command: ceph -s
-      changed_when: false
-      delegate_to: client0
-      run_once: true
+#- hosts: clients
+#  gather_facts: false
+#  become: True
+#  any_errors_fatal: true
+#  post_tasks:
+#    - name: "get ceph status from the first monitor"
+#      command: ceph -s
+#      changed_when: false
+#      delegate_to: client0
+#      run_once: true
