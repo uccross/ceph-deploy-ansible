@@ -18,9 +18,7 @@
     mkdir "{{ local_home }}/cluster" ;
 
 - name: "install ceph-deploy"
-  shell: |
-    sudo apt-get -f install ; 
-    sudo apt-get install -y python-virtualenv ; 
+  shell: | 
     cd "{{ local_home }}/cluster" ;
     virtualenv env ;
     env/bin/pip install ceph-deploy==1.5.38 ;
